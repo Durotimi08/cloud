@@ -847,9 +847,7 @@ form h3 img{
   top: 112px;
   left: 0;
   background: var(--bs-white);
-  width: calc(100% - 90px);
-  padding-left: 45px;
-  padding-right: 45px;
+  width: 100%;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -963,6 +961,7 @@ form h3 img{
 }
 .isitem12{
   width: 50%;
+  max-width: 500px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -1144,7 +1143,6 @@ form h3 img{
   overflow-y: auto;
 }
 .gen-msg{
-  padding: 15px;
   width: calc(100% - 30px);
 }
 .msg-line{
@@ -1258,6 +1256,7 @@ form h3 img{
   margin-top: 20px;
 }
 .catergo{
+  width: 100%;
   position: absolute;
   top: 114px;
   left: 0;
@@ -2196,11 +2195,8 @@ form h3 img{
     transform: scale(0.9);
   }
   .isitem{
-    width: 100%;
     top: 69px;
     padding-top: 15px;
-    padding-left: 0px;
-    padding-right: 0px;
     padding-bottom: 65px;
   }
   .heditem{
