@@ -58,7 +58,6 @@ export default function Navbar() {
             }
         }
     }
-    console.log(newer);
    }
    function hanf(){
     setSearche(false);

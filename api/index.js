@@ -1,5 +1,5 @@
 import express from "express"
-import db from "db"
+import db from "./db.js"
 
 const app = express();
 app.use(express.json())
