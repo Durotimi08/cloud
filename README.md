@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+This is a fullstack project powered by 
+- NextJS 13.2 (new app directory)  [Next.js](https://nextjs.org/) bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- Prisma
+- PostgresQL
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
 
-## Available Scripts
+First, run the development server:
 
-In the project directory, you can run:
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-### `npm start`
+- To connect nextJS to prisma we need to install two packages:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Prisma: Needed in dev mode or CI/CD pipeline. It helps manage the database by creating and executing migration, pulling/pushing from/to database. It is hoever not needed in production 
+2. Prisma client: It is used to connect the postgresQL database to the NextJS application and also executes the sequel queries. It is required in production
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- After installing those two packages, initialize prisma with command: "npx prisma init"
 
-### `npm test`
+- Next steps:
+1. Set the DATABASE_URL in the .env file to point to your existing database. If your database has no tables yet, read https://pris.ly/d/getting-started
+2. Set the provider of the datasource block in schema.prisma to match your database: postgresql, mysql, sqlite, sqlserver, mongodb or cockroachdb.
+3. Run "npx prisma db pull" to turn your database schema into a Prisma schema.
+4. Run "npx prisma generate dev --name <migration name>" to generate the Prisma Client. You can then start querying your database.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+NB: Prisma client stores all the type definitions inside node_modules directory, so, when building and deploying the application to vercel or CI/CD 
+pipeline, we need to re-install all the node_modules and re-generate the prisma client type definitions as part of the build process or post-installation generate them.
+This can be done by modifying the build script inside the package.json file as: "build": "npx prisma generate && next build"
 
-### `npm run build`
+Seeding: create a "seed.ts" file and seed your database with some default data for testing
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
 
-### `npm run eject`
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
 ## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To learn more about Next.js, take a look at the following resources:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-### Code Splitting
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Deploy on Vercel
 
-### Analyzing the Bundle Size
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

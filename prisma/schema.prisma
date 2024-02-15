@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRESQL_DB_URL")
+}
+
+model User {
+  id              String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  username        String    @unique @db.VarChar(50)
+  email           String    @unique @db.VarChar(500)
+  phone           String?   @unique @db.VarChar(50)
+  socialmediaUser Boolean?  @default(false)
+  password        String?   @db.VarChar(500)
+  role            Role      @default(CUSTOMER)
+  cart            Json[]    @default([])
+  Product         Product[]
+}
+
+model Product {
+  id          String @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  category    String @db.VarChar(50)
+  description String @db.VarChar(5000)
+  price       String @db.VarChar(50)
+  image       String @db.VarChar(500)
+  name        String @db.VarChar(255)
+  vendorid    String @db.Uuid
+  vendor      User   @relation(fields: [vendorid], references: [id])
+}
+
+enum Role {
+  ADMIN
+  VENDOR
+  CUSTOMER
+}
